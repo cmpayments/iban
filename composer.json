@@ -1,0 +1,38 @@
+{
+  "name": "cmpayments/iban",
+  "type": "library",
+  "description": "IBAN utility library",
+  "keywords": [
+    "iban",
+    "validation"
+  ],
+  "homepage": "http://github.com/cmpayments/iban",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Bas Peters",
+      "email": "bp@cm.nl",
+      "homepage": "https://github.com/baspeters"
+    }
+  ],
+  "support": {
+    "issues": "https://github.com/cmpayments/iban/issues"
+  },
+  "require": {
+    "php": ">=5.5"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^4.7|>=5.0 <5.4",
+    "squizlabs/php_codesniffer": "^2.3",
+    "jakub-onderka/php-parallel-lint": "^0.9.0"
+  },
+  "suggest": {
+    "ext-bcmath": "Because this library makes use of bcmod function, bcmath extension is recommended for performance.",
+    "phpunit/phpunit": "If PHP Unit is not globally installed on your system the tests will not run, install the PHP Unit package locally to run the tests"
+  },
+  "autoload": {
+    "psr-4": {
+      "CMPayments\\": "src/lib/"
+    }
+  }
+}
