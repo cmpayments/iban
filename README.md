@@ -43,8 +43,8 @@ Bugs and feature request are tracked on [GitHub](https://github.com/cmpayments/i
 
 The cmpayment/iban library is copyright © [Bas Peters](https://github.com/baspeters/) and licensed for use under the MIT License (MIT). Please see [LICENSE][] for more information.
 
-[badge-build]: https://img.shields.io/travis/cmpayments/uuid/iban.svg?style=flat-square
-[badge-quality]: https://img.shields.io/scrutinizer/g/cmpayments/uuid/iban.svg?style=flat-square
+[badge-build]: https://img.shields.io/travis/cmpayments/iban.svg?style=flat-square
+[badge-quality]: https://img.shields.io/scrutinizer/g/cmpayments/iban.svg?style=flat-square
 [badge-license]: https://img.shields.io/badge/license-MIT-brightgreen.svg?style=flat-square
 [badge-downloads]: https://img.shields.io/packagist/dt/cmpayments/iban.svg?style=flat-square
 
