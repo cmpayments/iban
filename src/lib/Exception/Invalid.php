@@ -2,7 +2,7 @@
 namespace CMPayments\Exception;
 
 
-class InvalidChecksum extends Invalid
+class Invalid extends \Exception
 {
 
 }

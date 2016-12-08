@@ -2,7 +2,7 @@
 namespace CMPayments\Exception;
 
 
-class InvalidCountry extends \Exception
+class InvalidCountry extends Invalid
 {
 
 }

@@ -2,7 +2,7 @@
 namespace CMPayments\Exception;
 
 
-class InvalidFormat extends \Exception
+class InvalidFormat extends Invalid
 {
 
 }

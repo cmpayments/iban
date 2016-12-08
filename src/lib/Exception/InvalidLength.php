@@ -2,7 +2,7 @@
 namespace CMPayments\Exception;
 
 
-class InvalidLength extends \Exception
+class InvalidLength extends Invalid
 {
 
 }
