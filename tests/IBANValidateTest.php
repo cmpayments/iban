@@ -119,14 +119,15 @@ class IBANValidateTest extends PHPUnit_Framework_TestCase
     {
         return array_map(function ($iban) {
             return [new IBAN($iban)];
-        }, require(__DIR__ . '/data/validIbans.php'));
+
+        }, require __DIR__ . '/data/ValidIbans.php');
     }
 
     public function provideInvalidIban()
     {
         return array_map(function ($iban) {
             return [new IBAN($iban)];
-        }, require(__DIR__ . '/data/invalidIbans.php'));
+        }, require(__DIR__ . '/data/InvalidIbans.php'));
     }
 
     public function provideSanitizeIban()
