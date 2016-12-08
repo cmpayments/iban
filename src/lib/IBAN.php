@@ -15,7 +15,7 @@ use CMPayments\Exception\InvalidLength;
  * @package  IBAN
  * @author   Bas Peters <bp@cm.nl>
  *
- * @link     https://github.com/cmpayments/iban
+ * @link https://github.com/cmpayments/iban
  */
 
 class IBAN
@@ -155,6 +155,7 @@ class IBAN
 
     /**
      * Validate the supplied IBAN and throw exception when validation fails
+     *
      * @throws InvalidChecksum
      * @throws InvalidCountry
      * @throws InvalidFormat
