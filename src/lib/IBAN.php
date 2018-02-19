@@ -182,12 +182,10 @@ class IBAN
     public function format()
     {
         return sprintf(
-            '%s %s %s %s %s',
+            '%s %s %s',
             $this->getCountryCode() . $this->getChecksum(),
             substr($this->getInstituteIdentification(), 0, 4),
-            substr($this->getBankAccountNumber(), 0, 4),
-            substr($this->getBankAccountNumber(), 4, 4),
-            substr($this->getBankAccountNumber(), 8, 2)
+            implode(' ', str_split($this->getBankAccountNumber(), 4))
         );
     }
 
@@ -238,7 +236,9 @@ class IBAN
      */
     public function getBankAccountNumber()
     {
-        return substr($this->iban, static::BANK_ACCOUNT_NUMBER_OFFSET, static::BANK_ACCOUNT_NUMBER_LENGTH);
+        $countryCode = $this->getCountryCode();
+        $length = static::$ibanFormatMap[$countryCode][0] - static::INSTITUTE_IDENTIFICATION_LENGTH;
+        return substr($this->iban, static::BANK_ACCOUNT_NUMBER_OFFSET, $length);
     }
 
     /**
