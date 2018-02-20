@@ -1,6 +1,10 @@
 <?php
 
 namespace CMPayments;
+use CMPayments\Exception\InvalidChecksum;
+use CMPayments\Exception\InvalidCountry;
+use CMPayments\Exception\InvalidFormat;
+use CMPayments\Exception\InvalidLength;
 
 /**
  * IBAN information and validation library
@@ -11,7 +15,7 @@ namespace CMPayments;
  * @package  IBAN
  * @author   Bas Peters <bp@cm.nl>
  *
- * @link     https://github.com/cmpayments/iban
+ * @link https://github.com/cmpayments/iban
  */
 
 class IBAN
@@ -19,15 +23,15 @@ class IBAN
     /**
      * Semantic IBAN structure constants
      */
-    const COUNTRY_CODE_OFFSET             = 0;
-    const COUNTRY_CODE_LENGTH             = 2;
-    const CHECKSUM_OFFSET                 = 2;
-    const CHECKSUM_LENGTH                 = 2;
-    const ACCOUNT_IDENTIFICATION_OFFSET   = 4;
+    const COUNTRY_CODE_OFFSET = 0;
+    const COUNTRY_CODE_LENGTH = 2;
+    const CHECKSUM_OFFSET = 2;
+    const CHECKSUM_LENGTH = 2;
+    const ACCOUNT_IDENTIFICATION_OFFSET = 4;
     const INSTITUTE_IDENTIFICATION_OFFSET = 4;
     const INSTITUTE_IDENTIFICATION_LENGTH = 4;
-    const BANK_ACCOUNT_NUMBER_OFFSET      = 8;
-    const BANK_ACCOUNT_NUMBER_LENGTH      = 10;
+    const BANK_ACCOUNT_NUMBER_OFFSET = 8;
+    const BANK_ACCOUNT_NUMBER_LENGTH = 10;
 
     /**
      * @var array Country code to size, regex format for each country that supports IBAN
@@ -150,6 +154,33 @@ class IBAN
     }
 
     /**
+     * Validate the supplied IBAN and throw exception when validation fails
+     *
+     * @throws InvalidChecksum
+     * @throws InvalidCountry
+     * @throws InvalidFormat
+     * @throws InvalidLength
+     */
+    public function check()
+    {
+        if (!$this->isCountryCodeValid()) {
+            throw new InvalidCountry("IBAN ({$this->iban}) country code not valid or not supported");
+        }
+
+        if (!$this->isLengthValid()) {
+            throw new InvalidLength("IBAN ({$this->iban}) length is invalid");
+        }
+
+        if (!$this->isFormatValid()) {
+            throw new InvalidFormat("IBAN ({$this->iban}) format is invalid");
+        }
+
+        if (!$this->isChecksumValid()) {
+            throw new InvalidChecksum("IBAN ({$this->iban}) checksum is invalid");
+        }
+    }
+
+    /**
      * Validates the supplied IBAN and provides passthrough failure message when validation fails
      *
      * @param null $error passthrough variable
@@ -172,6 +203,14 @@ class IBAN
         }
 
         return false;
+    }
+
+    /**
+     * @return string
+     */
+    public function __toString()
+    {
+        return $this->format();
     }
 
     /**
@@ -240,6 +279,7 @@ class IBAN
         $length = static::$ibanFormatMap[$countryCode][0] - static::INSTITUTE_IDENTIFICATION_LENGTH;
         return substr($this->iban, static::BANK_ACCOUNT_NUMBER_OFFSET, $length);
     }
+
 
     /**
      * Validate IBAN length boundaries
@@ -334,9 +374,9 @@ class IBAN
         foreach (str_split($letterRepresentation) as $char) {
             $ord = ord($char);
             if ($ord >= 65 && $ord <= 90) {
-                $numericRepresentation .= (string) ($ord - 55);
+                $numericRepresentation .= (string)($ord - 55);
             } elseif ($ord >= 48 && $ord <= 57) {
-                $numericRepresentation .= (string) ($ord - 48);
+                $numericRepresentation .= (string)($ord - 48);
             }
         }
 
